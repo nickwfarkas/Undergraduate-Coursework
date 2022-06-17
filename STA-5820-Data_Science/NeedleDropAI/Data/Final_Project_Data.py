@@ -133,7 +133,7 @@ def remove_x(s: str):
 def spotify_search(track_name: str, artist: str, rating: int, failed: list, tracks: list):
     temp = {}
     search_str = f'{track_name}+{artist}'
-    sp = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials(client_id='f575730c650f406c907639330cea2d7d', client_secret='d85383869e364d089c0870555eeb68ce'))
+    sp = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials(client_id='', client_secret=''))
     try:
         result = sp.search(search_str)
         track = sp.track(result["tracks"]["items"][0]["id"])
