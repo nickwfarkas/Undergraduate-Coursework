@@ -1,0 +1,3 @@
+([('Script',
+   '/Users/nicholasfarkas/Downloads/Software_Engineering/Assignments/GroupProject3/dist/Script',
+   'EXECUTABLE')],)
