@@ -9,9 +9,11 @@ import pandas as pd
 api_service_name = "youtube"
 api_version = "v3"
 DEVELOPER_KEY = ""
-# failed = []
-# data_set = []
 
+
+'''
+Get playlist Id from YouTube API
+'''
 def get_playlist_id():
 
     youtube = googleapiclient.discovery.build(
@@ -35,6 +37,10 @@ def get_playlist_id():
             
     return playlist_id
 
+
+'''
+Get all video items in the playlist
+'''
 def get_playlist_items_YT(id):
     
     youtube = googleapiclient.discovery.build(
@@ -78,7 +84,11 @@ def get_playlist_items_YT(id):
     json_file = open("data.json", 'w', encoding='utf-8')
     json_file.write(json.dumps(tracks))
     json_file.close()
-    
+
+
+'''
+Data scrape music ratings from video description
+'''
 def get_tracks_YT(playlist_items, tracks):
     for i in range(len(playlist_items["items"])):
         if("Weekly Track Roundup" in playlist_items["items"][i]["snippet"]["title"]):
@@ -102,6 +112,9 @@ def get_tracks_YT(playlist_items, tracks):
                 elif(len(temp) > 0):
                     tracks.append({"artist": temp[0], "title": temp[1], "score": -1})
 
+'''
+Remove uneeded information from music titles. Isolate and split artist and song name
+'''
 def validate_split(line: str):
     if('-' in line and ':' not in line):
         temp = line.split('-')
@@ -129,7 +142,11 @@ def remove_and(s: str):
 def remove_x(s: str):
     arr = s.split(' x ')
     return arr[0].strip()
-    
+
+'''
+Search spotify API for tracking using track name and artist name.
+Save music stats in data object. Handle errors for manual intervention.
+''' 
 def spotify_search(track_name: str, artist: str, rating: int, failed: list, tracks: list):
     temp = {}
     search_str = f'{track_name}+{artist}'
@@ -162,6 +179,9 @@ def spotify_search(track_name: str, artist: str, rating: int, failed: list, trac
         failed.append(f"{artist}~{track_name}~{rating}")
         print("Index Error")
         
+'''
+Join spotify data (music stats) with youtube data (rating and titles)
+'''
 def merge_data(input_file):
     yt_data_file = open(input_file, 'r', encoding='utf-8')
     yt = json.load(yt_data_file)
@@ -188,22 +208,10 @@ def merge_data(input_file):
     json_file = open("Failed.json", 'w', encoding='utf-8')
     json_file.write(json.dumps(failed))
     json_file.close()
-    
-def split_data():
-    yt_data_file = open("data.json", 'r', encoding='utf-8')
-    yt = json.load(yt_data_file)
-    y = {}
-    y["y1"] = yt[0:1000]
-    y["y2"] = yt[1000:2000]
-    y["y3"] = yt[2000:3000]
-    y["y4"] = yt[3000:4000]
-    y["y5"] = yt[4000:]
-    
-    for i in range(5):
-        json_file = open("data"+str(i+1)+".json", 'w', encoding='utf-8')
-        json_file.write(json.dumps(y['y'+str(i+1)]))
-        json_file.close()
-        
+
+'''
+Driver function to export data
+'''
 if __name__ == "__main__":
     with open('NeedleDrop.json', encoding='utf-8') as inputfile:
         jn = pd.read_json(inputfile)
