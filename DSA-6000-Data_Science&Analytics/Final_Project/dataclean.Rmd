@@ -1,0 +1,627 @@
+---
+title: "Final"
+output: word_document
+date: "2023-12-13"
+---
+
+```{r}
+library(lubridate)
+```
+
+```{r}
+
+```
+
+
+
+```{r}
+cols <- c("target","unixdate","quarter","month","week","day","weekday")
+files <- c("2016.csv","ANT-USD.csv","SnP500 All assets.csv","AP001.csv","WTI Price FOB.csv",
+           "AirPassengers.csv","amazon.csv","Brent Spot Price.csv","continuous dataset.csv",
+           "CrimeDate (1).csv","HH Spot Price.csv","final_losangeles copy.csv","Imports Crude Oil.csv",
+           "forex.csv","NIFTY 50 - 1 day_with_indicators_.csv","north.csv","NIFTY50_all.csv",
+           "us-counties.csv","Nuclear Capacity.csv","yellow_tripdata_2016-01.csv")
+```
+
+## Template
+
+```{r}
+df <- read.csv(file)
+filename <- strsplit(file,"[.]")[[1]][1]
+print(filename)
+
+# Rename Response
+colnames(df)[colnames(df) == "value"] = "target"
+
+# Use Date Type
+df$date <- as.Date(df$date)
+
+# Date Predictors
+df$unixdate <- as.numeric(as.POSIXct(format(df$date,"%Y-%m-%d"), format="%Y-%m-%d"))
+df$quarter <- quarter(df$date)
+df$month <- month(df$date)
+df$week <- week(df$date)
+df$day <- yday(df$date)
+df$weekday <- wday(df$date)
+df <- df[cols]
+
+save(df, file = paste(filename,"-final.RData",sep=""))
+rm(df)
+```
+
+## Dataset 2016
+
+```{r}
+filename <- "2016.csv"
+df <- read.csv(filename)
+filename <- strsplit(filename,"[.]")[[1]][1]
+head(df)
+```
+
+```{r}
+# Rename Response
+colnames(df)[colnames(df) == "FL_DATE"] = "date"
+colnames(df)[colnames(df) == "ARR_DELAY"] = "target"
+
+# Use Date Type
+df$date <- as.Date(df$date)
+
+# Date Predictors
+df$unixdate <- as.numeric(as.POSIXct(format(df$date,"%Y-%m-%d"), format="%Y-%m-%d"))
+df$quarter <- quarter(df$date)
+df$month <- month(df$date)
+df$week <- week(df$date)
+df$day <- yday(df$date)
+df$weekday <- wday(df$date)
+df <- df[cols]
+
+save(df, file = paste(filename,"-final.RData",sep=""))
+rm(df)
+```
+
+## Dataset AAP_SP
+
+```{r}
+filename <- "AAP_SP.csv"
+df <- read.csv(filename)
+filename <- strsplit(filename,"[.]")[[1]][1]
+head(df)
+```
+
+```{r}
+# Rename Response
+colnames(df)[colnames(df) == "Date"] = "date"
+colnames(df)[colnames(df) == "AAP"] = "target"
+
+# Use Date Type
+df$date <- as.Date(df$date)
+
+# Date Predictors
+df$unixdate <- as.numeric(as.POSIXct(format(df$date,"%Y-%m-%d"), format="%Y-%m-%d"))
+df$quarter <- quarter(df$date)
+df$month <- month(df$date)
+df$week <- week(df$date)
+df$day <- yday(df$date)
+df$weekday <- wday(df$date)
+df <- df[cols]
+
+save(df, file = paste(filename,"-final.RData",sep=""))
+rm(df)
+```
+
+## Dataset us-counties
+
+```{r}
+filename <- "us-counties.csv"
+df <- read.csv(filename)
+filename <- strsplit(filename,"[.]")[[1]][1]
+head(df)
+```
+
+```{r}
+# Use Date Type
+df$date <- as.Date(mdy(df$date))
+
+# Date Predictors
+df$unixdate <- as.numeric(as.POSIXct(format(df$date,"%Y-%m-%d"), format="%Y-%m-%d"))
+df$quarter <- quarter(df$date)
+df$month <- month(df$date)
+df$week <- week(df$date)
+df$day <- yday(df$date)
+df$weekday <- wday(df$date)
+df <- df[cols]
+
+save(df, file = paste(filename,"-final.RData",sep=""))
+rm(df)
+```
+
+## Dataset forex
+
+```{r}
+filename <- "forex.csv"
+df <- read.csv(filename)
+filename <- strsplit(filename,"[.]")[[1]][1]
+head(df)
+```
+
+```{r}
+# Rename Response
+colnames(df)[colnames(df) == "close"] = "target"
+
+# Use Date Type
+df$date <- as.Date(df$date)
+
+# Date Predictors
+df$unixdate <- as.numeric(as.POSIXct(format(df$date,"%Y-%m-%d"), format="%Y-%m-%d"))
+df$quarter <- quarter(df$date)
+df$month <- month(df$date)
+df$week <- week(df$date)
+df$day <- yday(df$date)
+df$weekday <- wday(df$date)
+df <- df[cols]
+
+save(df, file = paste(filename,"-final.RData",sep=""))
+rm(df)
+```
+
+## Dataset yellow_tripdata_2016-01
+
+```{r}
+filename <- "yellow_tripdata_2016-01.csv"
+df <- read.csv(filename)
+filename <- strsplit(filename,"[.]")[[1]][1]
+head(df)
+```
+
+```{r}
+# Rename Response
+colnames(df)[colnames(df) == "tpep_pickup_datetime"] = "date"
+colnames(df)[colnames(df) == "total_amount"] = "target"
+
+# Use Date Type
+df$date <- as.Date(df$date)
+
+# Date Predictors
+df$unixdate <- as.numeric(as.POSIXct(format(df$date,"%Y-%m-%d"), format="%Y-%m-%d"))
+df$quarter <- quarter(df$date)
+df$month <- month(df$date)
+df$week <- week(df$date)
+df$day <- yday(df$date)
+df$weekday <- wday(df$date)
+df <- df[cols]
+
+save(df, file = paste(filename,"-final.RData",sep=""))
+rm(df)
+```
+
+## Dataset Nuclear Capacity
+
+```{r}
+filename <- "WTI Price FOB.csv"
+df <- read.csv(filename)
+filename <- strsplit(filename,"[.]")[[1]][1]
+head(df)
+```
+
+```{r}
+# Rename Response
+colnames(df)[colnames(df) == "Cushing..OK.WTI.Spot.Price.FOB..Monthly..Dollars.per.Barrel."] = "target"
+colnames(df)[colnames(df) == "X"] = "date"
+# Use Date Type
+df$date <- as.Date(ym(df$date))
+
+# Date Predictors
+df$unixdate <- as.numeric(as.POSIXct(format(df$date,"%Y-%m-%d"), format="%Y-%m-%d"))
+df$quarter <- quarter(df$date)
+df$month <- month(df$date)
+df$week <- week(df$date)
+df$day <- yday(df$date)
+df$weekday <- wday(df$date)
+df <- df[cols]
+
+save(df, file = paste(filename,"-final.RData",sep=""))
+rm(df)
+```
+
+## Imports Crude Oil
+
+```{r}
+filename <- "Imports Crude Oil.csv"
+df <- read.csv(filename)
+filename <- strsplit(filename,"[.]")[[1]][1]
+head(df)
+```
+
+```{r}
+# Rename Response
+colnames(df)[colnames(df) == "Imports.of.all.grades.of.crude.oil.from.World.to.Total.U.S...US...Monthly..thousand.barrels."] = "target"
+colnames(df)[colnames(df) == "X"] = "date"
+# Use Date Type
+df$date <- as.Date(ym(df$date))
+
+# Date Predictors
+df$unixdate <- as.numeric(as.POSIXct(format(df$date,"%Y-%m-%d"), format="%Y-%m-%d"))
+df$quarter <- quarter(df$date)
+df$month <- month(df$date)
+df$week <- week(df$date)
+df$day <- yday(df$date)
+df$weekday <- wday(df$date)
+df <- df[cols]
+
+save(df, file = paste(filename,"-final.RData",sep=""))
+rm(df)
+```
+
+## HH Spot Price
+
+```{r}
+filename <- "HH Spot Price.csv"
+df <- read.csv(filename)
+filename <- strsplit(filename,"[.]")[[1]][1]
+head(df)
+```
+
+```{r}
+# Rename Response
+colnames(df)[colnames(df) == "Henry.Hub.Natural.Gas.Spot.Price..Monthly..Dollars.per.Million.Btu."] = "target"
+colnames(df)[colnames(df) == "X"] = "date"
+# Use Date Type
+df$date <- as.Date(ym(df$date))
+
+# Date Predictors
+df$unixdate <- as.numeric(as.POSIXct(format(df$date,"%Y-%m-%d"), format="%Y-%m-%d"))
+df$quarter <- quarter(df$date)
+df$month <- month(df$date)
+df$week <- week(df$date)
+df$day <- yday(df$date)
+df$weekday <- wday(df$date)
+df <- df[cols]
+
+save(df, file = paste(filename,"-final.RData",sep=""))
+rm(df)
+```
+
+## Brent Spot Price
+
+```{r}
+filename <- "Brent Spot Price.csv"
+df <- read.csv(filename)
+filename <- strsplit(filename,"[.]")[[1]][1]
+head(df)
+```
+
+```{r}
+# Rename Response
+colnames(df)[colnames(df) == "Brent.crude.oil.spot.price..Monthly..dollars.per.barrel."] = "target"
+colnames(df)[colnames(df) == "X"] = "date"
+# Use Date Type
+df$date <- as.Date(ym(df$date))
+
+# Date Predictors
+df$unixdate <- as.numeric(as.POSIXct(format(df$date,"%Y-%m-%d"), format="%Y-%m-%d"))
+df$quarter <- quarter(df$date)
+df$month <- month(df$date)
+df$week <- week(df$date)
+df$day <- yday(df$date)
+df$weekday <- wday(df$date)
+df <- df[cols]
+
+save(df, file = paste(filename,"-final.RData",sep=""))
+rm(df)
+```
+
+## AirPassengers
+
+```{r}
+filename <- "AirPassengers.csv"
+df <- read.csv(filename)
+filename <- strsplit(filename,"[.]")[[1]][1]
+head(df)
+```
+
+```{r}
+# Rename Response
+colnames(df)[colnames(df) == "X.Passengers"] = "target"
+colnames(df)[colnames(df) == "Month"] = "date"
+# Use Date Type
+df$date <- as.Date(ym(df$date))
+
+# Date Predictors
+df$unixdate <- as.numeric(as.POSIXct(format(df$date,"%Y-%m-%d"), format="%Y-%m-%d"))
+df$quarter <- quarter(df$date)
+df$month <- month(df$date)
+df$week <- week(df$date)
+df$day <- yday(df$date)
+df$weekday <- wday(df$date)
+df <- df[cols]
+
+save(df, file = paste(filename,"-final.RData",sep=""))
+rm(df)
+```
+
+## amazon
+
+```{r}
+filename <- "amazon.csv"
+df <- read.csv(filename)
+filename <- strsplit(filename,"[.]")[[1]][1]
+head(df)
+```
+
+```{r}
+# Rename Response
+colnames(df)[colnames(df) == "number"] = "target"
+# Use Date Type
+df$date <- as.Date(df$date)
+
+# Date Predictors
+df$unixdate <- as.numeric(as.POSIXct(format(df$date,"%Y-%m-%d"), format="%Y-%m-%d"))
+df$quarter <- quarter(df$date)
+df$month <- month(df$date)
+df$week <- week(df$date)
+df$day <- yday(df$date)
+df$weekday <- wday(df$date)
+df <- df[cols]
+
+save(df, file = paste(filename,"-final.RData",sep=""))
+rm(df)
+```
+
+## AP001
+
+```{r}
+filename <- "AP001.csv"
+df <- read.csv(filename)
+filename <- strsplit(filename,"[.]")[[1]][1]
+head(df)
+```
+
+```{r}
+# Rename Response
+colnames(df)[colnames(df) == "From.Date"] = "date"
+colnames(df)[colnames(df) == "Temp..degree.C."] = "target"
+# Use Date Type
+df$date <- as.Date(df$date)
+
+# Date Predictors
+df$unixdate <- as.numeric(as.POSIXct(format(df$date,"%Y-%m-%d"), format="%Y-%m-%d"))
+df$quarter <- quarter(df$date)
+df$month <- month(df$date)
+df$week <- week(df$date)
+df$day <- yday(df$date)
+df$weekday <- wday(df$date)
+df <- df[cols]
+
+save(df, file = paste(filename,"-final.RData",sep=""))
+rm(df)
+```
+
+## ANT-USD
+
+```{r}
+filename <- "ANT-USD.csv"
+df <- read.csv(filename)
+filename <- strsplit(filename,"[.]")[[1]][1]
+head(df)
+```
+
+```{r}
+# Rename Response
+colnames(df)[colnames(df) == "timestamp"] = "date"
+colnames(df)[colnames(df) == "adjclose"] = "target"
+# Use Date Type
+df$date <- as.Date(df$date)
+
+# Date Predictors
+df$unixdate <- as.numeric(as.POSIXct(format(df$date,"%Y-%m-%d"), format="%Y-%m-%d"))
+df$quarter <- quarter(df$date)
+df$month <- month(df$date)
+df$week <- week(df$date)
+df$day <- yday(df$date)
+df$weekday <- wday(df$date)
+df <- df[cols]
+
+save(df, file = paste(filename,"-final.RData",sep=""))
+rm(df)
+```
+
+## NIFTY50_all
+
+```{r}
+filename <- "NIFTY50_all.csv"
+df <- read.csv(filename)
+filename <- strsplit(filename,"[.]")[[1]][1]
+head(df)
+```
+
+```{r}
+# Rename Response
+colnames(df)[colnames(df) == "Date"] = "date"
+colnames(df)[colnames(df) == "Close"] = "target"
+# Use Date Type
+df$date <- as.Date(df$date)
+
+# Date Predictors
+df$unixdate <- as.numeric(as.POSIXct(format(df$date,"%Y-%m-%d"), format="%Y-%m-%d"))
+df$quarter <- quarter(df$date)
+df$month <- month(df$date)
+df$week <- week(df$date)
+df$day <- yday(df$date)
+df$weekday <- wday(df$date)
+df <- df[cols]
+
+save(df, file = paste(filename,"-final.RData",sep=""))
+rm(df)
+```
+
+## NIFTY 50 - 1 day_with_indicators_
+
+```{r}
+filename <- "NIFTY 50 - 1 day_with_indicators_.csv"
+df <- read.csv(filename)
+filename <- strsplit(filename,"[.]")[[1]][1]
+head(df)
+```
+
+```{r}
+# Rename Response
+colnames(df)[colnames(df) == "close"] = "target"
+# Use Date Type
+df$date <- as.Date(df$date)
+
+# Date Predictors
+df$unixdate <- as.numeric(as.POSIXct(format(df$date,"%Y-%m-%d"), format="%Y-%m-%d"))
+df$quarter <- quarter(df$date)
+df$month <- month(df$date)
+df$week <- week(df$date)
+df$day <- yday(df$date)
+df$weekday <- wday(df$date)
+df <- df[cols]
+
+save(df, file = paste(filename,"-final.RData",sep=""))
+rm(df)
+```
+
+## north
+
+```{r}
+filename <- "north.csv"
+df <- read.csv(filename)
+filename <- strsplit(filename,"[.]")[[1]][1]
+head(df)
+```
+
+```{r}
+# Rename Response
+colnames(df)[colnames(df) == "Data"] = "date"
+colnames(df)[colnames(df) == "TEMPERATURA.ORVALHO.MIN..NA.HORA.ANT...AUT....C."] = "target"
+# Use Date Type
+df$date <- as.Date(df$date)
+
+# Date Predictors
+df$unixdate <- as.numeric(as.POSIXct(format(df$date,"%Y-%m-%d"), format="%Y-%m-%d"))
+df$quarter <- quarter(df$date)
+df$month <- month(df$date)
+df$week <- week(df$date)
+df$day <- yday(df$date)
+df$weekday <- wday(df$date)
+df <- df[cols]
+
+save(df, file = paste(filename,"-final.RData",sep=""))
+rm(df)
+```
+
+## CrimeDate (1)
+
+```{r}
+filename <- "CrimeDate (1).csv"
+df <- read.csv(filename)
+filename <- strsplit(filename,"[.]")[[1]][1]
+head(df)
+```
+
+```{r}
+# Rename Response
+colnames(df)[colnames(df) == "crime_count"] = "target"
+# Use Date Type
+df$date <- as.Date(df$date)
+
+# Date Predictors
+df$unixdate <- as.numeric(as.POSIXct(format(df$date,"%Y-%m-%d"), format="%Y-%m-%d"))
+df$quarter <- quarter(df$date)
+df$month <- month(df$date)
+df$week <- week(df$date)
+df$day <- yday(df$date)
+df$weekday <- wday(df$date)
+df <- df[cols]
+
+save(df, file = paste(filename,"-final.RData",sep=""))
+rm(df)
+```
+
+## final_losangeles copy
+
+```{r}
+filename <- "final_losangeles copy.csv"
+df <- read.csv(filename)
+filename <- strsplit(filename,"[.]")[[1]][1]
+head(df)
+```
+
+```{r}
+# Rename Response
+colnames(df)[colnames(df) == "Date"] = "date"
+colnames(df)[colnames(df) == "MeanTravelTimeSeconds"] = "target"
+# Use Date Type
+df$date <- as.Date(df$date)
+
+# Date Predictors
+df$unixdate <- as.numeric(as.POSIXct(format(df$date,"%Y-%m-%d"), format="%Y-%m-%d"))
+df$quarter <- quarter(df$date)
+df$month <- month(df$date)
+df$week <- week(df$date)
+df$day <- yday(df$date)
+df$weekday <- wday(df$date)
+df <- df[cols]
+
+save(df, file = paste(filename,"-final.RData",sep=""))
+rm(df)
+```
+
+## continuous dataset
+
+```{r}
+filename <- "continuous dataset.csv"
+df <- read.csv(filename)
+filename <- strsplit(filename,"[.]")[[1]][1]
+head(df)
+```
+
+```{r}
+# Rename Response
+colnames(df)[colnames(df) == "datetime"] = "date"
+colnames(df)[colnames(df) == "nat_demand"] = "target"
+# Use Date Type
+df$date <- as.Date(df$date)
+
+# Date Predictors
+df$unixdate <- as.numeric(as.POSIXct(format(df$date,"%Y-%m-%d"), format="%Y-%m-%d"))
+df$quarter <- quarter(df$date)
+df$month <- month(df$date)
+df$week <- week(df$date)
+df$day <- yday(df$date)
+df$weekday <- wday(df$date)
+df <- df[cols]
+
+save(df, file = paste(filename,"-final.RData",sep=""))
+rm(df)
+```
+
+## POP
+
+```{r}
+filename <- "POP.csv"
+df <- read.csv(filename)
+filename <- strsplit(filename,"[.]")[[1]][1]
+head(df)
+```
+
+```{r}
+# Rename Response
+colnames(df)[colnames(df) == "value"] = "target"
+# Use Date Type
+df$date <- as.Date(df$date)
+
+# Date Predictors
+df$unixdate <- as.numeric(as.POSIXct(format(df$date,"%Y-%m-%d"), format="%Y-%m-%d"))
+df$quarter <- quarter(df$date)
+df$month <- month(df$date)
+df$week <- week(df$date)
+df$day <- yday(df$date)
+df$weekday <- wday(df$date)
+df <- df[cols]
+
+save(df, file = paste(filename,"-final.RData",sep=""))
+rm(df)
+```
+

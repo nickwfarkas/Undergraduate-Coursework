@@ -1,0 +1,40 @@
+---
+title: "Analytics"
+output: word_document
+date: "2023-12-13"
+---
+
+```{r}
+
+```
+
+```{r}
+datasets <- c(
+"2016-final.RData",                             
+"Nuclear Capacity-final.RData",
+"AAP_SP-final.RData",                           
+"POP-final.RData",
+"ANT-USD-final.RData",                          
+"AP001-final.RData",                               
+"WTI Price FOB-final.RData",
+"AirPassengers-final.RData",                       
+"amazon-final.RData",                                     
+"continuous dataset-final.RData",
+"Brent Spot Price-final.RData",                   
+"CrimeDate (1)-final.RData",                       
+"final_losangeles copy-final.RData",
+"HH Spot Price-final.RData",                       
+"forex-final.RData",
+"Imports Crude Oil-final.RData",                   
+"north-final.RData",
+"NIFTY 50 - 1 day_with_indicators_-final.RData",   
+"us-counties-final.RData",
+"NIFTY50_all-final.RData",                         
+"yellow_tripdata_2016-01-final.RData"
+)
+```
+
+## R Markdown
+
+
+
